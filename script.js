@@ -206,11 +206,7 @@ function nextQuestion () {
    if( questionCounter >= STORE.length ){
      finalResult().show;
      
-     // Render the final results with the final score and some message.
-     // Have this section have a restart button
-     // Add one last event listener to the restart button
-     // On that event listener you need to reset quesiton and score to 0
-     // And then call the functions updateQuestionAndScore() renderAQuestion();
+   
    }
    else{
      updateQuestionAndScore();
@@ -242,8 +238,6 @@ $('.js-quiz').html(
 );
 
 }
-
-
 
 
 handleStartClick(); 
