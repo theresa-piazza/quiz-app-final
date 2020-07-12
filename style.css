@@ -1,0 +1,197 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+
+header {
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #DDDDE3;
+}
+
+h1 {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Lily Script One', serif;
+  font-size: 70px;
+  background-color: #DDDDE3;
+}
+
+body {
+min-height: 100%;
+background-color: #DDDDE3;
+background-image: url(../images/myCity.jpg);
+background-repeat: repeat;
+height: 100%;
+
+
+}
+
+.background {
+background-image: url(../images/myCity.jpg);
+background-repeat: repeat;
+height: 100%;
+
+}
+
+
+
+
+.first-button {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.start-button {
+  background-color:#FFEBEE;
+  color: #3B3E54;
+  padding: 1%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #f72585;
+  cursor: pointer;
+}
+
+.next-button {
+  background-color:#FFEBEE;
+  color: #3B3E54;
+  padding: 1%;
+  text-align: center;
+  font-size: 15px;
+  border: 2px solid #f72585;
+  cursor: pointer;
+}
+
+.questionHere {
+  background-color:#B6F7ED;
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 22px;
+}
+
+
+.submitHere #answer {
+  border: #f72585 2px solid;
+  padding: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.finalScreen {
+  width: 50%;
+  padding: 15px;
+  margin:0 auto;
+  text-align: center;
+  background: #B6F7ED;
+  border-radius: 12px;
+  border: 4px #83c5be solid;
+  font-family:'IBM Plex Serif', serif;
+  font-size: 18px;
+}
+
+.finalScreen #restart {
+  border: 2px #f72585 solid;
+  padding: 5px;
+  font-weight: bold;
+}
+
+fieldset {
+  width: 75%;
+  padding: 20px;
+  margin:0 auto;
+  background: #B6F7ED;
+  border-radius: 12px;
+  border: 4px #83c5be solid;
+}
+
+.responseHere {
+  width: 50%;
+  padding: 15px;
+  margin:0 auto;
+  text-align: center;
+  background: #B6F7ED;
+  border-radius: 12px;
+  border: 4px #83c5be solid;
+  font-family:'IBM Plex Serif', serif;
+  
+}
+
+.responseHere p {
+  font-size: 18px;
+  font-family:'IBM Plex Serif', serif;
+  padding: 5px;
+}
+
+
+.optionsHere {
+  padding: 15px;
+  background-color:#D6FFF3;
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 20px;
+
+}
+
+
+.question-and-score {
+  text-align: center;
+  background-color: rgb(92, 190, 247);
+  font-size: 20px;
+  font-family:'IBM Plex Serif', serif;
+  font-weight: bold;
+  padding: 5px;
+  
+}
+
+.errorMessage {
+  font-size: 35px;
+  color: #f72585;
+  background-color:#DDDDE3;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  
+}
+
+
+/* mobile first using flex */
+.group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+
+/* media queries for desktop */
+@media all and (min-width: 600px) {
+  .group {
+    flex-direction: row;
+  }
+   header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  fieldset {
+    width: 40%;
+    
+  }
+
+  .responseHere {
+    width: 30%;
+  }
+
+  .finalScreen {
+    width: 30%;
+  }
+
+  
+}
