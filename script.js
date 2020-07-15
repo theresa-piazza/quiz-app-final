@@ -69,22 +69,23 @@ let questionCounter = 0;
 
 // to display the question
 function renderAQuestion() {
+$('.question-and-score').removeClass('hidden');
 $('.js-start-button').hide();
 $('.js-quiz').show();
-  let questionHtml = 
-$(`<form id="questions">
-    <fieldset>
-    <div class="questionHere">
-      ${STORE[questionCounter].question}
-      </div><div class="submitHere">
-      ${renderOptions()}
-      <button type="submit" id="answer" class="submit-button">Submit</button></div>
-    </fieldset>
-  </form>`);
-
 $('.js-quiz').html(questionHtml);
-console.log("renderAQuestion ran");
-};
+}
+
+function questionHtml () {
+  return `<form id="questions">
+          <fieldset>
+          <div class="questionHere">
+          ${STORE[questionCounter].question}
+          </div><div class="submitHere">
+          ${renderOptions()}
+          <button type="submit" id="answer" class="submit-button">Submit</button></div>
+          </fieldset>
+          </form>`;
+}
 
 function renderOptions () {
   let options = "";
@@ -107,12 +108,10 @@ function renderOptions () {
 
 // click start button to begin quiz
 function handleStartClick ( ) {
-$(".question-and-score").hide();
 $('.js-start-button').on('click', function (event) {
   console.log("handleStartClick ran");
-  
-  renderAQuestion();
-  $(".question-and-score").show();
+  $('.js-quiz').html(renderAQuestion);
+  updateQuestionAndScore();
 });
 }
 
@@ -139,12 +138,14 @@ $('.js-quiz').on('click', '#answer', function (event) {
     console.log(correct);
 
       if (realResponse === correct) {
-      correctAnswer();
+      $('.js-quiz').html(correctAnswer);
+      score ++;
+      updateQuestionAndScore();
       console.log("this is the correct answer")
     
     } else {
-      wrongAnswer();
-      console.log("wrong")
+      $('.js-quiz').html(wrongAnswer);
+      console.log("wrong answer")
       $('.response').show();
     } 
   }
@@ -153,11 +154,6 @@ $('.js-quiz').on('click', '#answer', function (event) {
 
 };
 
-function updateScore () {
-  score++;
-  $('#js-score').html(score);
-  console.log(score);
-}
 
 // updates what number question of the quiz you're on
 function updateQuestionAndScore() {
@@ -168,18 +164,20 @@ $(`<ul>
     </ul>`);
   $(".question-and-score").html(questionAndScore);
   return questionAndScore;
-}
+};
 
 function finalResult () {
 $('#next-question').hide();
 $('.js-quiz').hide();
-
-let endOfQuiz = 
-$(`<div class="finalScreen"><h2>You have completed the quiz!</h2> <p>Your score was ${score} out of ${questionCounter}<br><br>
-Want to try again? <button type="submit" id="restart" class="submit-button">restart the quiz!</button> </p></div>`);
-
 $('.finalMessage').html(endOfQuiz);
-console.log("finalResult ran");
+$('.finalMessage').show();
+};
+
+function endOfQuiz () { 
+return $(`<div class="finalScreen">
+          <h2>You have completed the quiz!</h2> <p>Your score was ${score} out of ${questionCounter}<br><br>
+          Want to try again? 
+          <button type="submit" id="restart" class="submit-button">restart the quiz!</button> </p></div>`);
 };
 
 
@@ -190,7 +188,7 @@ $('.finalMessage').on('click', '#restart', function (event) {
   questionCounter = 0;
   score = 0;
   updateQuestionAndScore();
-  renderAQuestion();
+  $('.js-quiz').html(renderAQuestion);
   $('.finalMessage').hide();
  
 });  
@@ -206,11 +204,11 @@ function nextQuestion () {
    if( questionCounter >= STORE.length ){
      finalResult().show;
      
-   
+    
    }
    else{
      updateQuestionAndScore();
-     renderAQuestion();
+     $('.js-quiz').html(renderAQuestion);
    }
   
 });
@@ -218,33 +216,35 @@ function nextQuestion () {
 
 
 function correctAnswer () {
-  $('.js-quiz').html(
-    `<div class="responseHere">
-    <h2>Your answer is correct!</h2>
-        <p>congratulations!</p>
-        <button type="button" id="next-question" class="next-button"> Next Question, Please!</button></div>`
-  );
-  score ++;
-  updateQuestionAndScore()
-  console.log('updateScore ran');
+  return `<div class="responseHere">
+            <h2>Your answer is correct! </h2>
+            <p>Congratulations!</p>
+            <button type="button" id="next-question" class="next-button"> 
+              Next Question, Please!
+            </button>
+          </div>`;  
+  
 }
 
 function wrongAnswer () {
-$('.js-quiz').html(
-    `<div class="responseHere">
-    <h2>Your response is incorrect. </h2>
-      <p>The answer is: ${STORE[questionCounter].correctAnswer}</p>
-      <button type="button" id="next-question" class="next-button"> Next Question, Please!</button></div>`
-);
+  return `<div class="responseHere">
+            <h2>Your response is incorrect. </h2>
+            <p>The answer is: ${STORE[questionCounter].correctAnswer}</p>
+            <button type="button" id="next-question" class="next-button"> 
+              Next Question, Please!
+            </button>
+          </div>`;
 
 }
 
 
-handleStartClick(); 
-answerQuestions();
-nextQuestion();
-updateQuestionAndScore(); 
-restartQuiz();
 
+function init(){
+  handleStartClick(); 
+  answerQuestions();
+  nextQuestion();
+  restartQuiz();
+}
 
+$(init);
 
