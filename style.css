@@ -36,7 +36,7 @@ height: 100%;
 }
 
 .background {
-background-image: url(../images/myCity.jpg);
+background-image: url("myCity.jpg");
 background-repeat: repeat;
 height: 100%;
 
